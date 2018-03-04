@@ -10,22 +10,19 @@ namespace WebAddressbookTests
     [TestFixture]
     public class GroupCreationTests : TestBase
     {
-
-
         [Test]
         public void GroupCreationTest()
         {
-            GotoHomePage();
-            Login(new AccountData("admin", "secret"));
-            GotoGroupsPage();
-            InitGroupCreation();
+            app.Navigator.GotoHomePage();
+            app.Auth.Login(new AccountData("admin", "secret"));
+            app.Navigator.GotoGroupsPage();
+            app.Groups.InitGroupCreation();
             GroupData group = new GroupData("group_name");
             group.Header = "group_header";
             group.Footer = "group_footer";
-            FillGroupForm(group);
-            SubmitGroupCreation();
-            ReturnToGroupsPage();
+            app.Groups.FillGroupForm(group);
+            app.Groups.SubmitGroupCreation();
+            app.Navigator.ReturnToGroupsPage();
         }
-   
     }
 }

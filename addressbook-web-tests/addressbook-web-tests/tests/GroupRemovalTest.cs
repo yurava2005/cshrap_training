@@ -12,22 +12,15 @@ namespace WebAddressbookTests
     [TestFixture]
     public class GroupRemovalTests : TestBase
     {
-
-
-
         [Test]
         public void GroupRemovalTest()
         {
-            GotoHomePage();
-            Login(new AccountData("admin", "secret"));
-            GotoGroupsPage();
-            SelectGroup(1);
-            RemoveGroup();
-            ReturnToGroupsPage();
+            app.Navigator.GotoHomePage();
+            app.Auth.Login(new AccountData("admin", "secret"));
+            app.Navigator.GotoGroupsPage();
+            app.Groups.SelectGroup(1);
+            app.Groups.RemoveGroup();
+            app.Navigator.ReturnToGroupsPage();
         }
-
-
-
-
     }
 }
