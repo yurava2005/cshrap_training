@@ -9,53 +9,19 @@ namespace WebAddressbookTests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
-        private string firstname;
-        private string middlename = "";
-        private string lastname = "";
 
         public ContactData(string firstname)
         {
-            this.firstname = firstname;
+            Firstname = firstname;
         }
 
-        public string Firstname
-        {
-            get
-            {
-                return firstname;
-            }
+        public string Firstname { get; set; }
 
-            set
-            {
-                firstname = value;
-            }
-        }
+        public string Middlename { get; set; }
 
-        public string Middlename
-        {
-            get
-            {
-                return middlename;
-            }
+        public string Lastname { get; set; }
 
-            set
-            {
-                middlename = value;
-            }
-        }
-
-        public string Lastname
-        {
-            get
-            {
-                return lastname;
-            }
-
-            set
-            {
-                lastname = value;
-            }
-        }
+        public string Id { get; set; }
 
         public bool Equals(ContactData other)
         {
@@ -69,7 +35,7 @@ namespace WebAddressbookTests
                 return true;
             }
 
-            return firstname == other.firstname && lastname == other.lastname;
+            return Firstname == other.Firstname && Lastname == other.Lastname;
         }
 
         public override int GetHashCode()

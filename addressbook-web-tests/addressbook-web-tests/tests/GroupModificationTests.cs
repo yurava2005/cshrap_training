@@ -21,14 +21,29 @@ namespace WebAddressbookTests
             newData.Footer = null;
 
             List<GroupData> oldGroups = app.Groups.GetGroupList();
+ 
 
             app.Groups.Modify(0, newData);
 
+            Assert.AreEqual(oldGroups.Count, app.Groups.GetGroupCount());
+
+
             List<GroupData> newGroups = app.Groups.GetGroupList();
+            GroupData oldData = oldGroups[0];
             oldGroups[0].Name = newData.Name;
             oldGroups.Sort();
             newGroups.Sort();
+
+            // first  - expected, then Actual 
             Assert.AreEqual(oldGroups, newGroups);
+
+            foreach (GroupData group in newGroups)
+            {
+                if (group.Id == oldData.Id)
+                {
+                    Assert.AreEqual(newData.Name, group.Name);
+                }
+            }
         }
     }
 }
