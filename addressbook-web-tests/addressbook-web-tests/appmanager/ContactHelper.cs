@@ -18,6 +18,7 @@ namespace WebAddressbookTests
 
         public ContactHelper Create(ContactData contact)
         {
+            manager.Navigator.GotoHomePage();
             InitContactCreation();
             FillContactForm(contact);
             SubmitContactCreation();
@@ -28,6 +29,7 @@ namespace WebAddressbookTests
         public ContactHelper Modify(int index, ContactData newContact)
         {
             manager.Navigator.GotoHomePage();
+            PrepareContact();
             InitContactModification(index);
             FillContactForm(newContact);
             SubmitContactModification();
@@ -38,11 +40,21 @@ namespace WebAddressbookTests
         public ContactHelper Remove(int index)
         {
             manager.Navigator.GotoHomePage();
+            PrepareContact();
             SelectContact(index);
             RemoveContact();
             return this;
         }
 
+        private ContactHelper PrepareContact()
+        {
+            if (! IsElementPresent(By.Name("entry")))
+            {
+                ContactData cnt = new ContactData("special_contact_name");
+                Create(cnt);
+            }
+            return this;
+        }
 
         public ContactHelper InitContactCreation()
         {
