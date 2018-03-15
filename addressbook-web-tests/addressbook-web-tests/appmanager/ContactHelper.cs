@@ -116,17 +116,14 @@ namespace WebAddressbookTests
                 contactCache = new List<ContactData>();
                 manager.Navigator.GotoHomePage();
                 ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
-                int i = 2;
-                string row = "//table[@id='maintable']/tbody/tr[";
                 foreach (IWebElement element in elements)
                 {
-                    string currow = row + i;
-                    contactCache.Add(new ContactData(element.FindElement(By.XPath(currow + "]/td[3]")).Text)
+                    ICollection<IWebElement> cells = element.FindElements(By.TagName("td"));
+                    contactCache.Add(new ContactData(cells.ElementAt(2).Text)
                     {
                         Id = element.FindElement(By.TagName("input")).GetAttribute("value"),
-                        Lastname = element.FindElement(By.XPath(currow + "]/td[2]")).Text
+                        Lastname = cells.ElementAt(1).Text
                     });
-                    i++;
                 }
             }
 
