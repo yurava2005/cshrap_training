@@ -30,7 +30,6 @@ namespace WebAddressbookTests
         public ContactHelper Modify(int index, ContactData newContact)
         {
             manager.Navigator.GotoHomePage();
-            PrepareContact();
             InitContactModification(index);
             FillContactForm(newContact);
             SubmitContactModification();
@@ -42,14 +41,13 @@ namespace WebAddressbookTests
         public ContactHelper Remove(int index)
         {
             manager.Navigator.GotoHomePage();
-            PrepareContact();
             SelectContact(index);
             RemoveContact();
             manager.Navigator.GotoHomePage();
             return this;
         }
 
-        private ContactHelper PrepareContact()
+        public ContactHelper PrepareContact()
         {
             if (! IsElementPresent(By.Name("entry")))
             {

@@ -13,9 +13,9 @@ namespace WebAddressbookTests
         [Test]
         public void ContactRemovalTest()
         {
+            app.Contacts.PrepareContact();
+
             List<ContactData> oldContacts = app.Contacts.GetContactList();
-
-
             app.Contacts.Remove(0);
 
             int exp = oldContacts.Count - 1;
