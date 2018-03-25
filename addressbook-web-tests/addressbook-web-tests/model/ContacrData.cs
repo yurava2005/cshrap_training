@@ -12,6 +12,7 @@ namespace WebAddressbookTests
     {
         private string allPhones;
         private string allEmails;
+        private string fullName;
 
         public ContactData(string firstname)
         {
@@ -37,6 +38,8 @@ namespace WebAddressbookTests
         public string Email2 { get; set; }
 
         public string Email3 { get; set; }
+
+        public string Id { get; set; }
 
         public string AllPhones
         {
@@ -79,6 +82,28 @@ namespace WebAddressbookTests
             }
         }
 
+
+        public string FullName
+        {
+            get
+            {
+                if (fullName != null)
+                {
+                    return fullName;
+                }
+                else
+                {
+                    return String.Format("{0} {1} {2}", Firstname, Middlename, Lastname).Trim();
+                    //return (Firstname + Midd; + Lastname).Trim();
+                }
+
+            }
+            set
+            {
+                fullName = value;
+            }
+        }        
+
         private string CleanUpEmail(string email)
         {
            // return Regex.Replace(email, "[ +]", " ") + "\r\n";
@@ -95,7 +120,7 @@ namespace WebAddressbookTests
             return Regex.Replace(phone, "[ ()-]", "") + "\r\n";
         }
 
-        public string Id { get; set; }
+
 
         public bool Equals(ContactData other)
         {

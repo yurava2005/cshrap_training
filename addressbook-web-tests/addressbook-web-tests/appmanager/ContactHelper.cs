@@ -36,6 +36,11 @@ namespace WebAddressbookTests
             };
         }
 
+        public ContactData GetContactInformationFromPage(int v)
+        {
+            throw new NotImplementedException();
+        }
+
         public ContactData GetContactInformatiomFromEditForm(int index)
         {
             manager.Navigator.GotoHomePage();
