@@ -16,5 +16,21 @@ namespace WebAddressbookTests
         {
             app = ApplicationManager.GetInstance();
         }
+
+        public static Random rnd = new Random();
+
+        public static string GenerateRandomString(int max)
+        {
+            Random rnd = new Random();
+            int l = Convert.ToInt32(rnd.NextDouble() * max);
+            StringBuilder builder = new StringBuilder();
+
+            for (int i = 0; i < l; i++)
+            {
+                // кды символов в соответствии ASCII
+                builder.Append(Convert.ToChar(32 + Convert.ToInt32(rnd.NextDouble() * 223)));
+            }
+            return builder.ToString();
+        }
     }
 }
