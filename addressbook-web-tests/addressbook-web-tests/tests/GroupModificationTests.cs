@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,7 +31,7 @@ namespace WebAddressbookTests
             List<GroupData> newGroups = app.Groups.GetGroupList();
             GroupData oldData = oldGroups[0];
             oldGroups[0].Name = newData.Name;
-            oldGroups.Sort();
+            oldGroups.Sort();-
             newGroups.Sort();
 
             // first  - expected, then Actual 

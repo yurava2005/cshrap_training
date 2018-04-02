@@ -18,32 +18,76 @@ namespace addressbook_testd_data_generators
             int count = Convert.ToInt32(args[0]);
             StreamWriter writer = new StreamWriter(args[1]);
             string format = args[2];
+            string dest = args[3];
 
-            List<GroupData> groups = new List<GroupData>();
-
-            for (int i = 0; i < count; i++)
+            if (dest == "groups")
             {
-                groups.Add(new GroupData(TestBase.GenerateRandomString(10))
+                List<GroupData> groups = new List<GroupData>();
+
+
+                for (int i = 0; i < count; i++)
                 {
-                    Header = TestBase.GenerateRandomString(10),
-                    Footer = TestBase.GenerateRandomString(10)
-                });
+
+                    groups.Add(new GroupData(TestBase.GenerateRandomString(10))
+                    {
+                        Header = TestBase.GenerateRandomString(10),
+                        Footer = TestBase.GenerateRandomString(10)
+                    });
+                }
+                if (format == "csv")
+                {
+                    WriteGroupsToCsvFile(groups, writer);
+                }
+                else if (format == "xml")
+                {
+                    WriteGroupsToXmlFile(groups, writer);
+                }
+                else if (format == "json")
+                {
+                    WriteGroupsToJsonFile(groups, writer);
+                }
+                else
+                {
+                    System.Console.Out.Write("Unrecognized format " + format);
+                }
+                writer.Close();
             }
-            if (format == "csv")
+            else if (dest == "contacts")
             {
-                WriteGroupsToCsvFile(groups, writer);
-            }
-            else if (format == "xml")
-            {
-                WriteGroupsToXmlFile(groups, writer);
-            }
-            else if (format == "json")
-            {
-                WriteGroupsToJsonFile(groups, writer);
+                List<ContactData> contacts = new List<ContactData>();
+
+
+                for (int i = 0; i < count; i++)
+                {
+
+                    contacts.Add(new ContactData(TestBase.GenerateRandomString(10))
+                    {
+                        Middlename = TestBase.GenerateRandomString(10),
+                        Lastname = TestBase.GenerateRandomString(10)
+                    });
+                }
+                if (format == "csv")
+                {
+                    WriteContactsToCsvFile(contacts, writer);
+                }
+                else if (format == "xml")
+                {
+                    WriteContactsToXmlFile(contacts, writer);
+                }
+                else if (format == "json")
+                {
+                    WriteContactsToJsonFile(contacts, writer);
+                }
+                else
+                {
+                    System.Console.Out.Write("Unrecognized format " + format);
+                }
+                //writer.Close();
             }
             else
             {
-                System.Console.Out.Write("Unrecognized format " + format);
+                System.Console.Out.Write("Unknown destination " + dest);
+                //writer.Close();
             }
             writer.Close();
         }
@@ -65,6 +109,26 @@ namespace addressbook_testd_data_generators
         static void WriteGroupsToJsonFile(List<GroupData> groups, StreamWriter writer)
         {
             writer.Write(JsonConvert.SerializeObject(groups, Newtonsoft.Json.Formatting.Indented));
+        }
+
+
+        static void WriteContactsToCsvFile(List<ContactData> contacts, StreamWriter writer)
+        {
+            foreach (ContactData contact in contacts)
+            {
+                writer.WriteLine(String.Format("${0},${1},${2}",
+                    contact.Firstname, contact.Middlename, contact.Lastname));
+            }
+        }
+
+        static void WriteContactsToXmlFile(List<ContactData> contacts, StreamWriter writer)
+        {
+            new XmlSerializer(typeof(List<ContactData>)).Serialize(writer, contacts);
+        }
+
+        static void WriteContactsToJsonFile(List<ContactData> contacts, StreamWriter writer)
+        {
+            writer.Write(JsonConvert.SerializeObject(contacts, Newtonsoft.Json.Formatting.Indented));
         }
     }
 }
