@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
+using System.Xml.Serialization;
 
 namespace WebAddressbookTests
 
@@ -12,7 +14,7 @@ namespace WebAddressbookTests
     {
         private string allPhones;
         private string allEmails;
-        private string allInfo;
+        private string fullContactInfo;
         private string cleanedAddress;
 
         public ContactData()
@@ -28,31 +30,56 @@ namespace WebAddressbookTests
         public string Firstname { get; set; }
         public string Middlename { get; set; }
         public string Lastname { get; set; }
+        [JsonIgnore, XmlIgnore]
         public string Address { get; set; }
+        [JsonIgnore, XmlIgnore]
         public string HomePhone { get; set; }
+        [JsonIgnore, XmlIgnore]
         public string MobilePhone { get; set; }
+        [JsonIgnore, XmlIgnore]
         public string WorkPhone { get; set; }
+        [JsonIgnore, XmlIgnore]
         public string Email1 { get; set; }
+        [JsonIgnore, XmlIgnore]
         public string Email2 { get; set; }
+        [JsonIgnore, XmlIgnore]
         public string Email3 { get; set; }
+        [JsonIgnore, XmlIgnore]
         public string Id { get; set; }
+        [JsonIgnore, XmlIgnore]
         public string Nickname { get; set; }
+        [JsonIgnore, XmlIgnore]
         public string Fax { get; set; }
+        [JsonIgnore, XmlIgnore]
         public string Homepage { get; set; }
+        [JsonIgnore, XmlIgnore]
         public string Birthday { get; set; }
+        [JsonIgnore, XmlIgnore]
         public string Annivesary { get; set; }
+        [JsonIgnore, XmlIgnore]
         public string SecondAddress { get; set; }
+        [JsonIgnore, XmlIgnore]
         public string SecondPhone { get; set; }
+        [JsonIgnore, XmlIgnore]
         public string Notes { get; set; }
+        [JsonIgnore, XmlIgnore]
         public string Title { get; set; }
+        [JsonIgnore, XmlIgnore]
         public string Company { get; set; }
+        [JsonIgnore, XmlIgnore]
         public string BDay { get;  set; }
+        [JsonIgnore, XmlIgnore]
         public string BYear { get;  set; }
+        [JsonIgnore, XmlIgnore]
         public string BMonth { get;  set; }
+        [JsonIgnore, XmlIgnore]
         public string ADay { get;  set; }
+        [JsonIgnore, XmlIgnore]
         public string AMonth { get;  set; }
+        [JsonIgnore, XmlIgnore]
         public string AYear { get;  set; }
-
+        [JsonIgnore, XmlIgnore]
+  
         public string CleanedAddress
         {
             get
@@ -71,6 +98,7 @@ namespace WebAddressbookTests
                 cleanedAddress = value;
             }
         }
+        [JsonIgnore, XmlIgnore]
         public string AllPhones
         {
             get
@@ -90,7 +118,7 @@ namespace WebAddressbookTests
                 allPhones = value;
             }
         }
-
+        [JsonIgnore, XmlIgnore]
         public string AllEmails
         {
             get
@@ -109,14 +137,14 @@ namespace WebAddressbookTests
                 allEmails = value;
             }
         }
-
+        [JsonIgnore, XmlIgnore]
         public string FullContactInfo
         {
             get
             {
-                if (allInfo != null)
+                if (fullContactInfo != null)
                 {
-                    return allInfo;
+                    return fullContactInfo;
                 }
                 else
                 {
@@ -140,7 +168,7 @@ namespace WebAddressbookTests
             }
             set
             {
-                allInfo = value;
+                fullContactInfo = value;
             }
         }
 
