@@ -84,6 +84,9 @@
     <Compile Include="tests\GroupCreationTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="contacts.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Groups.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -95,6 +98,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="contacts.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="Groups.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
