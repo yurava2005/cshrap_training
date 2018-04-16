@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.IO;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
@@ -52,7 +53,7 @@ namespace WebAddressbookTests
         public static IEnumerable<GroupData> GroupDataFromXmlFile()
         {
             List<GroupData> groups = new List<GroupData>();
-            return (List<GroupData>) 
+            return (List<GroupData>)
                 new XmlSerializer(typeof(List<GroupData>))
                 .Deserialize(new StreamReader(@"Groups.xml"));
         }
@@ -61,7 +62,7 @@ namespace WebAddressbookTests
         public static IEnumerable<GroupData> GroupDataFromJsonFile()
         {
 
-            return JsonConvert.DeserializeObject<List<GroupData>> (
+            return JsonConvert.DeserializeObject<List<GroupData>>(
                 File.ReadAllText(@"Groups.json"));
 
         }
@@ -98,7 +99,7 @@ namespace WebAddressbookTests
 
 
             List<GroupData> oldGroups = app.Groups.GetGroupList();
-            
+
             app.Groups.Create(group);
 
             Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
@@ -109,6 +110,22 @@ namespace WebAddressbookTests
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
+        }
+
+        [Test]
+        public void TestDBConnectivity()
+        {
+            DateTime start = DateTime.Now;
+            List<GroupData> fromUI = app.Groups.GetGroupList();
+            DateTime end = DateTime.Now;
+            System.Console.Out.Write(end.Subtract(start));
+
+            start = DateTime.Now;
+            AddressBookDB db = new AddressBookDB();
+            List<GroupData> fromDB = (from g in db.Groups select g).ToList();
+            db.Close();
+            end = DateTime.Now;
+            System.Console.Out.Write(end.Subtract(start));
         }
 
     }

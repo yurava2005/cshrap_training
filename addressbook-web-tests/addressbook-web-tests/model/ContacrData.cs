@@ -6,16 +6,19 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using System.Xml.Serialization;
+using LinqToDB.Mapping;
 
 namespace WebAddressbookTests
 
 {
+    [Table]
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
         private string allPhones;
         private string allEmails;
         private string fullContactInfo;
         private string cleanedAddress;
+
 
         public ContactData()
         {
